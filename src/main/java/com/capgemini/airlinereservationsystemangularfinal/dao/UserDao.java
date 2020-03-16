@@ -8,7 +8,7 @@ public interface UserDao {
 	
 	public boolean register(UserInfoBean userInfoBean);
 
-	public List<UserInfoBean> getuser(String username);
+	public List<UserInfoBean> getuser(String userName);
 
 	public boolean updateUser(UserInfoBean bean);
 

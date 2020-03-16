@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,11 +64,30 @@ public class AdminController {
 		}
 		return response;
 	}
-
-	@DeleteMapping(path = "/delete/{f_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public FlightResponse deleteFlight(@PathVariable("f_id") int f_id) {
+	
+	@GetMapping(path = "/getFlightDetails/{flightName}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public FlightResponse getFlightDetails(@PathVariable("flightName") String flightName) {
+		List<FlightBean> flightBean = flightservice.searchFlight(flightName);
 		FlightResponse response = new FlightResponse();
-		if (flightservice.deleteflight(f_id)) {
+		
+		if (flightBean != null) {
+			response.setStatusCode(201);
+			response.setMessage("success");
+			response.setDescription("user record found");
+			response.setFlightList(flightBean);
+		} else {
+			response.setStatusCode(401);
+			response.setMessage("failed");
+			response.setDescription("user record not found");
+			response.setFlightList(null);
+		}
+		return response;
+	}
+
+	@DeleteMapping(path = "/delete/{flightId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public FlightResponse deleteFlight(@PathVariable("flightId") int flightId) {
+		FlightResponse response = new FlightResponse();
+		if (flightservice.deleteFlight(flightId)) {
 			response.setStatusCode(201);
 			response.setMessage("success");
 			response.setDescription("Data deleted in DB");
@@ -97,8 +117,29 @@ public class AdminController {
 		}
 		return response;
 	}
+	
+	@GetMapping(path = "/getAllFlights", produces = MediaType.APPLICATION_JSON_VALUE)
+	public FlightResponse getAllFlights() {
+		List<FlightBean>  flightList = flightservice.getAllFlights();
+		FlightResponse response = new FlightResponse();
+		
+		if ( flightList!= null) {
+			response.setStatusCode(201);
+			response.setMessage("success");
+			response.setDescription("user record found");
+			response.setFlightList(flightList);
+			
+		} else {
+			response.setStatusCode(401);
+			response.setMessage("failed");
+			response.setDescription("user record not found");
+			response.setFlightList(null);
+		}
+		return response;
+	}
 
-	@PostMapping(path = "/updateUser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+	@PutMapping(path = "/updateUser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public UserResponse updateUser(@RequestBody UserInfoBean userInfoBean) {
 		UserResponse response = new UserResponse();
 
@@ -113,12 +154,12 @@ public class AdminController {
 		}
 		return response;
 	}
-
-	@PostMapping(path = "/updateFlight", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	
+	@PutMapping(path = "/updateFlight", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public FlightResponse updateFlight(@RequestBody FlightBean flightBean) {
 		FlightResponse response = new FlightResponse();
 
-		if (flightservice.updateflight(flightBean)) {
+		if (flightservice.updateFlight(flightBean)) {
 			response.setStatusCode(201);
 			response.setMessage("success");
 			response.setDescription("Data Updated in DB");
@@ -133,7 +174,7 @@ public class AdminController {
 	@PostMapping(path = "/flightregister", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public FlightResponse flightregistration(@RequestBody FlightBean flightbean) {
 		FlightResponse response = new FlightResponse();
-		if (flightservice.flightregister(flightbean)) {
+		if (flightservice.flightRegister(flightbean)) {
 			response.setStatusCode(200);
 			response.setMessage("success");
 			response.setDescription("Flight Registered SuccessFully!!");
@@ -141,7 +182,7 @@ public class AdminController {
 			response.setStatusCode(401);
 			response.setMessage("Failed");
 			response.setDescription("Flight Registered Failed");
-		}
+		} 
 		return response;
 	}
 }

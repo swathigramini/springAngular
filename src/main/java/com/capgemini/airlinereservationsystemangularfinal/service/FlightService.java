@@ -6,13 +6,14 @@ import com.capgemini.airlinereservationsystemangularfinal.beans.FlightBean;
 
 
 public interface FlightService {
-	public boolean flightregister(FlightBean flightbean);
+	
+	public boolean flightRegister(FlightBean flightbean);
 
 	public List<FlightBean> searchFlight(String flightName);
 
-	public List<FlightBean> getallflights();
+	public List<FlightBean> getAllFlights();
 
-	public boolean deleteflight(int f_id);
+	public boolean deleteFlight(int flightId);
 
-	public boolean updateflight(FlightBean bean);
+	public boolean updateFlight(FlightBean bean);
 }

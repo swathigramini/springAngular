@@ -16,8 +16,8 @@ public class FlightServiceImpl implements FlightService {
 	private FlightDaoImpl dao;
 
 	@Override
-	public boolean flightregister(FlightBean flightbean) {
-		return dao.flightregister(flightbean);
+	public boolean flightRegister(FlightBean flightbean) {
+		return dao.flightRegister(flightbean);
 	}
 
 	@Override
@@ -26,17 +26,17 @@ public class FlightServiceImpl implements FlightService {
 	}
 
 	@Override
-	public List<FlightBean> getallflights() {
-		return dao.getallflights();
+	public List<FlightBean> getAllFlights(){
+		return dao.getAllFlights();
 	}
 
 	@Override
-	public boolean deleteflight(int f_id) {
-		return dao.deleteflight(f_id);
+	public boolean deleteFlight(int flightId) {
+		return dao.deleteFlight(flightId);
 	}
 
 	@Override
-	public boolean updateflight(FlightBean bean) {
-		return false;
+	public boolean updateFlight(FlightBean bean){
+		return dao.updateFlight(bean);
 	}
 }

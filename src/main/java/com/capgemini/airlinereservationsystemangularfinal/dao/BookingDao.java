@@ -6,7 +6,10 @@ import com.capgemini.airlinereservationsystemangularfinal.beans.BookingBean;
 
 public interface BookingDao {
 
-	public boolean booking(BookingBean booking);
+	public boolean bookingFlights(BookingBean booking);
 	
-	public List<BookingBean> getticket();
+	public List<BookingBean> getTicket(int bookingId);
+	
+	public boolean deleteTicket(int bookingId);
+	
 }

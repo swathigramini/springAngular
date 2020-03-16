@@ -27,7 +27,7 @@ public class TicketBean {
 	private int no_of_seats;
 
 	@Column
-	private int f_id;
+	private int flightId;
 
 	@Column
 	private int userId;

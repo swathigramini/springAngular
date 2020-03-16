@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.airlinereservationsystemangularfinal.beans.BookingBean;
+import com.capgemini.airlinereservationsystemangularfinal.beans.UserInfoBean;
 import com.capgemini.airlinereservationsystemangularfinal.dao.BookingDaoImpl;
 
 @Service
@@ -14,15 +15,21 @@ public class BookingServieImpl implements BookingService {
 	@Autowired
 	private BookingDaoImpl dao;
 
-
 	@Override
-	public List<BookingBean> getticket() {
-		return dao.getticket();
+	public boolean bookingFlights(BookingBean booking) {
+		return dao.bookingFlights(booking);
 	}
 
 	@Override
-	public boolean booking(BookingBean booking) {
-		return dao.booking(booking);
+	public List<BookingBean> getTicket(int bookingId) {
+		return dao.getTicket(bookingId);
 	}
+
+	@Override
+	public boolean deleteTicket(int bookingId) {
+		return dao.deleteTicket(bookingId);
+	}
+
+
 
 }

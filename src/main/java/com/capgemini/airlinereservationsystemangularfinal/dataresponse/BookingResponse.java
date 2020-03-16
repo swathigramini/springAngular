@@ -2,7 +2,7 @@ package com.capgemini.airlinereservationsystemangularfinal.dataresponse;
 
 import java.util.List;
 
-import com.capgemini.airlinereservationsystemangularfinal.dao.BookingDao;
+import com.capgemini.airlinereservationsystemangularfinal.beans.BookingBean;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
@@ -15,6 +15,6 @@ public class BookingResponse {
 	private String message;
 	private String description;
 	
-	private BookingDao bookingbean;
-	private List<BookingDao> bookingList;
+	private BookingBean bookingBean;
+	private List<BookingBean> bookingList;
 }

@@ -17,6 +17,5 @@ public class ORM {
 	public BCryptPasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
 }
 
